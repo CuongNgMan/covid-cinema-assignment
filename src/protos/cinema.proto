@@ -1,0 +1,82 @@
+syntax = "proto3";
+
+package cinema;
+
+service CinemaSeatAllocation {
+  rpc GetAvailableCinemaSeat(Empty) returns (GetAvailableCinemaSeatResponse);
+  rpc ReserveSeat(ReserveSeatRequest) returns (ReserveSeatResponse);
+  rpc ListCinemaSeat(ListCinemaSeatRequest) returns (PublicCinemaSeatResponse);
+  rpc ReserveSeatByPotision(CinemaSeatPosition) returns (ReserveSeatByPotisionResponse);
+  rpc Login(LoginRequest) returns (LoginResponse);
+  rpc CreateUser(CreateUserRequest) returns (CreateUserResponse);
+}
+
+message Empty{}
+
+message CinemaSeat {
+  uint32 row = 1;
+  uint32 column = 2;
+  bool reserved = 3;
+}
+
+message CinemaRow {
+  repeated CinemaSeat row = 1;
+}
+
+message CinemaSeatPosition {
+  uint32 row = 1;
+  uint32 column = 2;
+}
+
+message ListCinemaSeatRequest {
+  bool reserveStatus = 1;
+}
+
+message GetAvailableCinemaSeatResponse {
+  CinemaSeat seat = 1;
+}
+
+message ReserveSeatRequest {
+  uint32 numberOfSeat = 1;
+}
+message ReserveSeatResponse {
+  repeated CinemaSeat seat = 1;
+  uint32 totalReserved = 2;
+  uint32 totalSeatRequest = 3;
+}
+
+
+message RowAndSeatPair {
+  int32 row = 1;
+  repeated CinemaSeat seats = 2;
+}
+message PublicCinemaSeatResponse {
+  repeated RowAndSeatPair data = 1;
+  uint32 totalSeat = 2;
+}
+
+message ReserveSeatByPotisionRequest {
+  CinemaSeatPosition position = 1;
+}
+message ReserveSeatByPotisionResponse {
+  bool success = 1;
+  string status = 2;
+}
+
+message CreateUserRequest {
+  string email = 1;
+  string password = 2;
+}
+message CreateUserResponse {
+  bool status = 1;
+  string message = 2;
+}
+
+message LoginRequest {
+  string email = 1;
+  string password = 2;
+
+}
+message LoginResponse {
+  string token = 1;
+}

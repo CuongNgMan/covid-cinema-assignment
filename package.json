@@ -1,0 +1,19 @@
+{
+  "name": "covid-cinema-seat",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "nodemon -r dotenv/config .",
+    "start": "node --max-old-space-size=8192 -r dotenv/config ."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@grpc/proto-loader": "^0.6.5",
+    "dotenv": "^10.0.0",
+    "grpc": "^1.24.11",
+    "jsonwebtoken": "^8.5.1"
+  }
+}
